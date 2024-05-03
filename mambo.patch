@@ -1,0 +1,51 @@
+diff --git a/dbm.c b/dbm.c
+index acaea08..4773055 100644
+--- a/dbm.c
++++ b/dbm.c
+@@ -677,6 +677,7 @@ void main(int argc, char **argv, char **envp) {
+   global_data.brk = 0;
+   struct elf_loader_auxv auxv;
+   uintptr_t entry_address;
++  global_data.base_addr = 0;
+   load_elf(argv[1], &elf, &auxv, &entry_address, false);
+   debug("entry address: 0x%" PRIxPTR "\n", entry_address);
+ 
+diff --git a/dbm.h b/dbm.h
+index cdfeb70..e0ac56f 100644
+--- a/dbm.h
++++ b/dbm.h
+@@ -333,6 +333,8 @@ typedef struct {
+   mambo_plugin plugins[MAX_PLUGIN_NO];
+   watched_functions_t watched_functions;
+ #endif
++
++  uintptr_t base_addr;
+ } dbm_global;
+ 
+ typedef struct {
+diff --git a/elf/elf_loader.c b/elf/elf_loader.c
+index f5160a7..f02a384 100644
+--- a/elf/elf_loader.c
++++ b/elf/elf_loader.c
+@@ -190,6 +190,9 @@ void load_elf(char *filename, Elf **ret_elf, struct elf_loader_auxv *auxv, uintp
+   }
+ 
+   base_addr = mmap((void *)min_addr, max_addr - min_addr, PROT_NONE, MAP_ANONYMOUS|MAP_PRIVATE, -1, 0);
++  if(global_data.base_addr == 0) {
++     global_data.base_addr = (uintptr_t) base_addr;
++  }
+   if (ehdr->e_type == ET_DYN) {
+     assert(base_addr != MAP_FAILED);
+     ehdr->e_entry += (uintptr_t)base_addr;
+diff --git a/makefile b/makefile
+index a3bc08b..28ce6f1 100644
+--- a/makefile
++++ b/makefile
+@@ -10,6 +10,7 @@
+ #PLUGINS+=plugins/memcheck/memcheck.S plugins/memcheck/memcheck.c plugins/memcheck/naive_stdlib.c
+ #PLUGINS+=plugins/follow_exec.c
+ #PLUGINS+=plugins/hotspot.c
++PLUGINS+=plugins/trace/aarch64_utils.c plugins/trace/cfg.c plugins/trace/instrumentation.c plugins/trace/instrumentation.S plugins/trace/save.c
+ 
+ OPTS= -DDBM_LINK_UNCOND_IMM
+ OPTS+=-DDBM_INLINE_UNCOND_IMM
