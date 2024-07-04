@@ -62,6 +62,8 @@ struct cfg_edge{
     cfg_edge* next;
 
     cfg_edge_type type;
+
+    intptr_t __pad;
 };
 
 /// Node in the CFG
