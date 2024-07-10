@@ -19,15 +19,10 @@
 
 #include <stdint.h>
 
-// DEFS
-
-#define CFG_MAX_IN_NODES 1024
-
 // ENUMS
 
 typedef struct cfg_node cfg_node;
 typedef struct cfg_edge cfg_edge;
-typedef struct cfg_node_linked_list cfg_node_linked_list;
 
 /// Type of the edge in the CFG
 typedef enum {
@@ -80,12 +75,6 @@ struct cfg_node {
     uint32_t branch_reg; ///< Register used for jumping by the indirect branch
 
     cfg_node_profile profile; ///< Profile of the node - tells if nodes executed more than 256 times
-};
-
-/// Linked list to store multiple nodes
-struct cfg_node_linked_list {
-    cfg_node* node;
-    cfg_node_linked_list* next;
 };
 
 // FUNCTIONS

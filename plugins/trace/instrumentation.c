@@ -14,16 +14,14 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-
 #ifdef PLUGINS_NEW
-
 #include <assert.h>
 #include <stdio.h>
 #include <sys/mman.h>
 #include <sys/wait.h>
 
 #include "cfg.h"
-#include "save.h"
+#include "writer.h"
 
 #include "instrumentation.h"
 
@@ -215,7 +213,7 @@ int lift_exit_cb(mambo_context *ctx) {
             (double) (get_virtual_counter() - timers.dynamic_execution) / (double) get_virtual_counter_frequency());
 #endif
 
-    save(ctx, plugin_data->cfg, plugin_data->main_addr, plugin_data->threads_entries);
+    write_trace(ctx, plugin_data->cfg, plugin_data->main_addr, plugin_data->threads_entries);
 
     mambo_free(ctx, plugin_data->cfg);
     mambo_free(ctx, plugin_data);

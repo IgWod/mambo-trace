@@ -30,4 +30,4 @@
  * @param main_addr Address of the main function.
  * @param thread_entries Dynamically discovered addresses of threads spawned by the application.
  */
-void save(mambo_context* ctx, mambo_ht_t* cfg, void* main_addr, lift_thread_metadata threads[NUMBER_THREAD_ENTRIES]);
+void write_trace(mambo_context* ctx, mambo_ht_t* cfg, void* main_addr, lift_thread_metadata threads[NUMBER_THREAD_ENTRIES]);

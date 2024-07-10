@@ -45,7 +45,7 @@ index a3bc08b..28ce6f1 100644
  #PLUGINS+=plugins/memcheck/memcheck.S plugins/memcheck/memcheck.c plugins/memcheck/naive_stdlib.c
  #PLUGINS+=plugins/follow_exec.c
  #PLUGINS+=plugins/hotspot.c
-+PLUGINS+=plugins/trace/aarch64_utils.c plugins/trace/cfg.c plugins/trace/instrumentation.c plugins/trace/instrumentation.S plugins/trace/save.c
++PLUGINS+=plugins/trace/aarch64_utils.c plugins/trace/cfg.c plugins/trace/instrumentation.c plugins/trace/instrumentation.S plugins/trace/writer.c
  
  OPTS= -DDBM_LINK_UNCOND_IMM
  OPTS+=-DDBM_INLINE_UNCOND_IMM

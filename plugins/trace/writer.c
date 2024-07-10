@@ -19,9 +19,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "save.h"
+#include "writer.h"
 
-void save(mambo_context* ctx, mambo_ht_t* cfg, void* main_addr, lift_thread_metadata threads[NUMBER_THREAD_ENTRIES]) {
+void write_trace(mambo_context* ctx, mambo_ht_t* cfg, void* main_addr, lift_thread_metadata threads[NUMBER_THREAD_ENTRIES]) {
     time_t timestamp = time(NULL);
     char tracename[128];
 
