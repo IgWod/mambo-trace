@@ -38,13 +38,13 @@ index f5160a7..f02a384 100644
      assert(base_addr != MAP_FAILED);
      ehdr->e_entry += (uintptr_t)base_addr;
 diff --git a/makefile b/makefile
-index a3bc08b..28ce6f1 100644
+index 4cdc73e..4ae9e96 100644
 --- a/makefile
 +++ b/makefile
-@@ -10,6 +10,7 @@
- #PLUGINS+=plugins/memcheck/memcheck.S plugins/memcheck/memcheck.c plugins/memcheck/naive_stdlib.c
- #PLUGINS+=plugins/follow_exec.c
+@@ -12,6 +12,7 @@
  #PLUGINS+=plugins/hotspot.c
+ #PLUGINS+=plugins/datarace/datarace.c plugins/datarace/detectors/fasttrack.c
+ #PLUGINS+=plugins/datarace/datarace.c plugins/datarace/detectors/djit.c
 +PLUGINS+=plugins/trace/aarch64_utils.c plugins/trace/cfg.c plugins/trace/instrumentation.c plugins/trace/instrumentation.S plugins/trace/writer.c
  
  OPTS= -DDBM_LINK_UNCOND_IMM
